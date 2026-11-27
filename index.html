@@ -4,19 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AM∞ — Practical AI for every business</title>
-  <meta name="description" content="AM∞ — Practical AI for every business. Custom AI assistants, voice agents, and workflow automation for shops, hospitals, schools, restaurants, and any organization." />
+  <meta name="description" content="AM∞ builds practical AI products you can try today: Bill Mitra, a Telugu electricity bill assistant, and Netra Command, an AI command centre for utilities and infrastructure." />
   <meta name="theme-color" content="#2563eb" />
   <link rel="canonical" href="https://aerostar09.github.io/aiforbusiness/" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="AM∞" />
   <meta property="og:title" content="AM∞ — Practical AI for every business" />
-  <meta property="og:description" content="Custom AI assistants, voice agents, and workflow automation for shops, hospitals, schools, restaurants, and any organization." />
+  <meta property="og:description" content="Live products: Bill Mitra and Netra Command. Custom voice, WhatsApp, and workflow AI for any organization." />
   <meta property="og:url" content="https://aerostar09.github.io/aiforbusiness/" />
   <meta property="og:image" content="https://aerostar09.github.io/aiforbusiness/assets/hero.webp" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AM∞ — Practical AI for every business" />
-  <meta name="twitter:description" content="Custom AI assistants, voice agents, and workflow automation for shops, hospitals, schools, restaurants, and any organization." />
+  <meta name="twitter:description" content="Live products: Bill Mitra and Netra Command. Custom voice, WhatsApp, and workflow AI for any organization." />
   <meta name="twitter:image" content="https://aerostar09.github.io/aiforbusiness/assets/hero.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -77,12 +77,84 @@
       font-weight: 800;
       letter-spacing: -0.04em;
     }
+    #products, #bill-mitra, #netra-command,
     #industries, #solutions, #finder, #process, #faq, #contact, #top {
       scroll-margin-top: 5.5rem;
+    }
+
+    /* AM∞ wordmark + infinity */
+    .am-defs {
+      position: absolute;
+      width: 0;
+      height: 0;
+      overflow: hidden;
+    }
+    .am-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.15rem;
+      text-decoration: none;
+    }
+    .am-letters {
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      font-size: 1.15rem;
+      line-height: 1;
+      color: #0f172a;
+    }
+    .am-brand-on-dark .am-letters {
+      color: #ffffff;
+    }
+    .am-infinity-svg {
+      width: 2.05rem;
+      height: 1.05rem;
+      display: block;
+      overflow: visible;
+    }
+    .am-infinity-base,
+    .am-infinity-flow {
+      fill: none;
+      stroke: url(#am-inf-grad);
+      stroke-width: 6.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .am-infinity-base {
+      opacity: 0.32;
+    }
+    .am-infinity-flow {
+      stroke-dasharray: 197;
+      stroke-dashoffset: 0;
+      animation: am-infinity-draw 6.5s ease-in-out infinite;
+    }
+    @keyframes am-infinity-draw {
+      0%   { stroke-dashoffset: 197; }
+      42%  { stroke-dashoffset: 0; }
+      58%  { stroke-dashoffset: 0; }
+      100% { stroke-dashoffset: -197; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .am-infinity-flow {
+        animation: none;
+        stroke-dashoffset: 0;
+        stroke-dasharray: none;
+        opacity: 1;
+      }
+      .am-infinity-base {
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body class="antialiased selection:bg-blue-100 selection:text-blue-900">
+  <svg class="am-defs" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="am-inf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#2563eb"/>
+        <stop offset="100%" stop-color="#0d9488"/>
+      </linearGradient>
+    </defs>
+  </svg>
 
   <!-- Toast Notification -->
   <div id="toast" class="fixed bottom-5 right-5 z-50 hidden max-w-sm rounded-xl bg-slate-900 px-4 py-3 text-sm font-medium text-white shadow-xl border border-slate-700 flex items-center gap-3 transition-all">
@@ -95,22 +167,19 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <!-- Brand -->
-        <a href="#top" class="flex items-center gap-2.5 group" aria-label="AM∞ home">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-teal-500 flex items-center justify-center shadow-sm">
-            <svg class="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M12 12c-2-2.67-4-4-6.5-4a4.5 4.5 0 1 0 0 9c2.5 0 4.5-1.33 6.5-4 2 2.67 4 4 6.5 4a4.5 4.5 0 1 0 0-9c-2.5 0-4.5 1.33-6.5 4"/>
-            </svg>
-          </div>
-          <span class="text-lg font-extrabold tracking-tight text-slate-900">
-            AM<span class="text-blue-600 brand-infinity">∞</span>
-          </span>
+        <a href="#top" class="am-brand" aria-label="AM∞ home">
+          <span class="am-letters" aria-hidden="true">AM</span>
+          <svg class="am-infinity-svg" viewBox="0 0 100 50" aria-hidden="true" focusable="false">
+            <path class="am-infinity-base" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
+            <path class="am-infinity-flow" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
+          </svg>
         </a>
 
         <!-- Desktop Nav -->
         <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
-          <a href="#industries" class="hover:text-blue-600 transition-colors">Industries</a>
+          <a href="#products" class="hover:text-blue-600 transition-colors">Products</a>
           <a href="#solutions" class="hover:text-blue-600 transition-colors">Solutions</a>
-          <a href="#finder" class="hover:text-blue-600 transition-colors">AI Finder</a>
+          <a href="#industries" class="hover:text-blue-600 transition-colors">Industries</a>
           <a href="#process" class="hover:text-blue-600 transition-colors">How It Works</a>
           <a href="#faq" class="hover:text-blue-600 transition-colors">FAQ</a>
         </nav>
@@ -119,7 +188,7 @@
         <div class="hidden md:flex items-center gap-3">
           <a href="#contact" class="text-sm font-semibold text-slate-700 hover:text-blue-600 px-3 py-2 transition-colors">Contact</a>
           <button type="button" id="nav-demo-btn" class="inline-flex items-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 transition-colors">
-            <span>Book Free Demo</span>
+            <span>Book a free demo</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
         </div>
@@ -133,14 +202,14 @@
 
     <!-- Mobile Dropdown -->
     <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 space-y-2 shadow-lg">
-      <a href="#industries" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Industries</a>
+      <a href="#products" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Products</a>
       <a href="#solutions" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Solutions</a>
-      <a href="#finder" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">AI Finder</a>
+      <a href="#industries" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Industries</a>
       <a href="#process" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">How It Works</a>
       <a href="#faq" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">FAQ</a>
       <a href="#contact" class="mobile-nav-link block px-3 py-2 rounded-lg text-sm font-medium text-slate-700 hover:bg-slate-50">Contact</a>
       <button type="button" id="mobile-demo-btn" class="w-full mt-2 inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-blue-700">
-        <span>Book Free Demo</span>
+        <span>Book a free demo</span>
         <i data-lucide="arrow-right" class="w-4 h-4"></i>
       </button>
     </div>
@@ -153,21 +222,21 @@
         <div class="max-w-3xl mx-auto text-center">
           <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/80 px-3.5 py-1.5 text-xs font-semibold text-blue-700 mb-6">
             <span class="w-2 h-2 rounded-full bg-teal-500"></span>
-            <span>Custom AI for Small Businesses, Hospitals, Schools, Food &amp; Any Organization</span>
+            <span>Two live products · Custom AI for any organization</span>
           </div>
           <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 leading-[1.1]">
-            Practical AI Solutions Built for <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600">Every Business</span>
+            Practical AI products for <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-600">real-world problems</span>
           </h1>
           <p class="mt-6 text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl mx-auto">
-            Whether you run a neighborhood shop, a busy restaurant, a hospital, a school, or a growing enterprise, <strong>AM∞</strong> designs and deploys tailored AI assistants, voice agents, and workflow automation that save hours every day.
+            Try <strong>Bill Mitra</strong> and <strong>Netra Command</strong> today — a Telugu electricity bill assistant, and an AI command centre for drone and satellite detections. We also build custom assistants for any organization.
           </p>
           <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5">
-            <a href="#finder" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-blue-600/20 hover:bg-blue-700 transition-all">
+            <a href="#products" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3.5 text-sm font-semibold text-white shadow-md shadow-blue-600/20 hover:bg-blue-700 transition-all">
               <i data-lucide="sparkles" class="w-4 h-4"></i>
-              <span>Find Your AI Solution</span>
+              <span>See our products</span>
             </a>
-            <a href="#industries" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-slate-300 px-6 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all">
-              <span>Explore Industries</span>
+            <a href="#solutions" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-slate-300 px-6 py-3.5 text-sm font-semibold text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all">
+              <span>Explore solutions</span>
               <i data-lucide="chevron-down" class="w-4 h-4"></i>
             </a>
           </div>
@@ -182,41 +251,164 @@
                 src="assets/hero.jpg"
                 width="1376"
                 height="768"
-                alt="Connected AI ecosystem serving a cafe, medical clinic, school, and modern business office"
+                alt="Custom AI assistants connecting a cafe, clinic, school, and office"
                 class="w-full h-auto max-w-full object-cover" fetchpriority="high" decoding="async"
               />
             </picture>
           </div>
-          <!-- Capability Strip -->
+          <!-- Product teasers -->
           <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <div class="rounded-2xl bg-white border border-slate-200/80 p-4 flex items-center gap-3.5 shadow-sm">
+            <a href="#bill-mitra" class="rounded-2xl bg-white border border-slate-200/80 p-4 flex items-center gap-3.5 shadow-sm card-hover">
               <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
-                <i data-lucide="phone-call" class="w-5 h-5"></i>
+                <i data-lucide="file-text" class="w-5 h-5"></i>
               </div>
               <div>
-                <p class="text-sm font-bold text-slate-900">24/7 Voice &amp; WhatsApp AI</p>
-                <p class="text-xs text-slate-500">Multilingual support in English &amp; regional languages</p>
+                <p class="text-sm font-bold text-slate-900">Bill Mitra <span class="ml-1 text-[10px] font-semibold uppercase tracking-wide text-teal-700 bg-teal-50 border border-teal-200 rounded-full px-1.5 py-0.5">Live</span></p>
+                <p class="text-xs text-slate-500">Telugu electricity bill assistant</p>
               </div>
-            </div>
-            <div class="rounded-2xl bg-white border border-slate-200/80 p-4 flex items-center gap-3.5 shadow-sm">
+            </a>
+            <a href="#netra-command" class="rounded-2xl bg-white border border-slate-200/80 p-4 flex items-center gap-3.5 shadow-sm card-hover">
               <div class="w-10 h-10 rounded-xl bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+                <i data-lucide="satellite" class="w-5 h-5"></i>
+              </div>
+              <div>
+                <p class="text-sm font-bold text-slate-900">Netra Command <span class="ml-1 text-[10px] font-semibold uppercase tracking-wide text-teal-700 bg-teal-50 border border-teal-200 rounded-full px-1.5 py-0.5">Live</span></p>
+                <p class="text-xs text-slate-500">Drone and satellite command centre</p>
+              </div>
+            </a>
+            <a href="#solutions" class="rounded-2xl bg-white border border-slate-200/80 p-4 flex items-center gap-3.5 shadow-sm card-hover">
+              <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
                 <i data-lucide="layers" class="w-5 h-5"></i>
               </div>
               <div>
-                <p class="text-sm font-bold text-slate-900">Fits Any Industry</p>
-                <p class="text-xs text-slate-500">Built around your workflows, not rigid templates</p>
+                <p class="text-sm font-bold text-slate-900">More solutions</p>
+                <p class="text-xs text-slate-500">Voice, WhatsApp, and workflow AI</p>
               </div>
-            </div>
-            <div class="rounded-2xl bg-white border border-slate-200/80 p-4 flex items-center gap-3.5 shadow-sm">
-              <div class="w-10 h-10 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
-                <i data-lucide="zap" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <p class="text-sm font-bold text-slate-900">Zero Tech Hassle</p>
-                <p class="text-xs text-slate-500">We build, integrate, train your staff &amp; maintain it</p>
-              </div>
-            </div>
+            </a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-16 sm:py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl">
+          <p class="text-xs font-bold uppercase tracking-wider text-blue-600">Live products</p>
+          <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
+            What you can try today
+          </h2>
+          <p class="mt-3 text-base text-slate-600">
+            Two working products, both live. Each is a demo / concept — not an official government or DISCOM service.
+          </p>
+        </div>
+
+        <div class="mt-10 space-y-10">
+          <!-- Bill Mitra -->
+          <article id="bill-mitra" class="rounded-3xl border border-slate-200 bg-slate-50 overflow-hidden shadow-sm">
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+              <div class="lg:col-span-6 bg-gradient-to-br from-emerald-50 to-slate-50 p-4 sm:p-6 flex items-center">
+                <div class="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-md w-full">
+                  <picture>
+                    <source srcset="assets/bill-mitra.webp" type="image/webp" />
+                    <img
+                      src="assets/bill-mitra.jpg"
+                      width="1376"
+                      height="774"
+                      alt="Bill Mitra demo on a sample bill: charges explained in Telugu, total shown as zero after Gruha Jyothi. Demo / Concept – not an official TSSPDCL or TSNPDCL service."
+                      class="w-full h-auto max-w-full object-cover" loading="lazy" decoding="async"
+                    />
+                  </picture>
+                </div>
+              </div>
+              <div class="lg:col-span-6 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-[11px] font-semibold uppercase tracking-wide text-teal-700 bg-teal-50 border border-teal-200 rounded-full px-2.5 py-1">Live demo</span>
+                  <span class="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-full px-2.5 py-1">TISC Challenge #13</span>
+                  <span class="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-full px-2.5 py-1">Voice by Sarvam AI</span>
+                </div>
+                <h3 class="mt-4 text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">Bill Mitra</h3>
+                <p class="mt-1 text-sm font-semibold text-blue-700">Telugu Electricity Bill Assistant</p>
+                <p class="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
+                  Photograph a TSSPDCL or TSNPDCL-style bill. Bill Mitra reads the key fields, explains the charges in simple Telugu — with voice — and estimates the next bill.
+                </p>
+                <ul class="mt-5 space-y-2 text-sm text-slate-700">
+                  <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i><span>Upload a bill photo</span></li>
+                  <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i><span>Key fields extracted</span></li>
+                  <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i><span>Simple Telugu explanation, with voice</span></li>
+                  <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i><span>Next-bill estimate</span></li>
+                </ul>
+                <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                  <a href="https://telugu-electricitybill-assistant.streamlit.app/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors">
+                    <span>Open live demo</span>
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                  </a>
+                  <a href="#contact" class="inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Talk to us</a>
+                </div>
+                <p class="mt-5 text-xs leading-relaxed text-slate-500 border-t border-slate-200 pt-4">
+                  Demo / Concept – not an official TSSPDCL/TSNPDCL/government service.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Netra Command -->
+          <article id="netra-command" class="rounded-3xl border border-slate-200 bg-slate-50 overflow-hidden shadow-sm">
+            <div class="grid grid-cols-1 lg:grid-cols-12">
+              <div class="lg:col-span-6 lg:order-2 bg-slate-900 p-4 sm:p-6 flex flex-col justify-center gap-3">
+                <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-md">
+                  <picture>
+                    <source srcset="assets/netra-gridwatch.webp" type="image/webp" />
+                    <img
+                      src="assets/netra-gridwatch.jpg"
+                      width="1170"
+                      height="1080"
+                      alt="GridWatch demo: a bird nest detected on a power-line fitting in drone imagery."
+                      class="w-full h-auto max-w-full object-cover object-center max-h-64 sm:max-h-80" loading="lazy" decoding="async"
+                    />
+                  </picture>
+                </div>
+                <div class="rounded-2xl overflow-hidden border border-slate-700 shadow-md">
+                  <picture>
+                    <source srcset="assets/netra-bhumi.webp" type="image/webp" />
+                    <img
+                      src="assets/netra-bhumi.jpg"
+                      width="1200"
+                      height="331"
+                      alt="Bhumi-Eye demo: before and after satellite scenes of a lake, with a change map. Indicative demo output, not official statistics."
+                      class="w-full h-auto max-w-full object-cover" loading="lazy" decoding="async"
+                    />
+                  </picture>
+                </div>
+              </div>
+              <div class="lg:col-span-6 lg:order-1 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-[11px] font-semibold uppercase tracking-wide text-teal-700 bg-teal-50 border border-teal-200 rounded-full px-2.5 py-1">Live demo</span>
+                  <span class="text-[11px] font-semibold text-slate-600 bg-white border border-slate-200 rounded-full px-2.5 py-1">Voice by Sarvam AI</span>
+                </div>
+                <h3 class="mt-4 text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-900">Netra Command</h3>
+                <p class="mt-1 text-sm font-semibold text-teal-700">AI command centre for utilities and infrastructure</p>
+                <p class="mt-3 text-sm sm:text-base text-slate-600 leading-relaxed">
+                  GridWatch reviews drone imagery for power-line faults. Bhumi-Eye compares satellite scenes of land and water. One core assigns a priority, a crew dispatch, and a voice alert.
+                </p>
+                <ul class="mt-5 space-y-2 text-sm text-slate-700">
+                  <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i><span><strong>GridWatch</strong> — drone imagery fault detection</span></li>
+                  <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i><span><strong>Bhumi-Eye</strong> — satellite change detection</span></li>
+                  <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-teal-600 shrink-0 mt-0.5"></i><span>Detection → incident priority → crew dispatch + voice alert</span></li>
+                </ul>
+                <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                  <a href="https://netra-command.streamlit.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white hover:bg-blue-700 transition-colors">
+                    <span>Open live demo</span>
+                    <i data-lucide="external-link" class="w-4 h-4"></i>
+                  </a>
+                  <a href="#contact" class="inline-flex items-center justify-center gap-2 rounded-xl bg-white border border-slate-300 px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors">Talk to us</a>
+                </div>
+                <p class="mt-5 text-xs leading-relaxed text-slate-500 border-t border-slate-200 pt-4">
+                  Demo / Concept – not an official TSSPDCL/TSNPDCL/government service. Not field-validated; a human review is required.
+                </p>
+              </div>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -225,12 +417,12 @@
     <section id="industries" class="py-16 sm:py-24 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl">
-          <p class="text-xs font-bold uppercase tracking-wider text-blue-600">Who We Serve</p>
+          <p class="text-xs font-bold uppercase tracking-wider text-blue-600">Who we serve</p>
           <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-            Tailored AI for Every Sector — Big or Small
+            First, the industries our products already serve
           </h2>
           <p class="mt-3 text-base text-slate-600">
-            Filter by industry to see practical ways businesses use our AI today. Don't see your exact niche? We build custom solutions for any organization.
+            Bill Mitra is built for energy and power distribution. Netra Command is built for infrastructure and field operations. The same approach can be tailored for shops, clinics, schools, restaurants, and any other organization.
           </p>
         </div>
 
@@ -253,13 +445,23 @@
           <!-- Left Visual + Info -->
           <div class="lg:col-span-5 space-y-6">
             <div>
-              <p class="text-xs font-bold uppercase tracking-wider text-teal-600">Modular AI Building Blocks</p>
+              <p class="text-xs font-bold uppercase tracking-wider text-teal-600">More solutions</p>
               <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-                What We Build for Your Team
+                Building blocks behind the products — and for everyone else
               </h2>
               <p class="mt-3 text-base text-slate-600">
-                Start with one high-impact AI tool and expand anytime. Click any module to preview how it works in real operations.
+                The same capabilities that power Bill Mitra and Netra Command can be tailored for any organization. Select a module to see an example.
               </p>
+              <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                <div class="rounded-xl bg-white border border-slate-200 p-3.5">
+                  <p class="text-xs font-bold uppercase tracking-wider text-blue-600">With Bill Mitra</p>
+                  <p class="mt-1 text-slate-600">Document reading, Telugu voice, and WhatsApp or web sharing.</p>
+                </div>
+                <div class="rounded-xl bg-white border border-slate-200 p-3.5">
+                  <p class="text-xs font-bold uppercase tracking-wider text-teal-600">With Netra Command</p>
+                  <p class="mt-1 text-slate-600">Workflow routing, incident insights, and crew voice alerts.</p>
+                </div>
+              </div>
             </div>
             <div class="rounded-2xl overflow-hidden border border-slate-200 bg-white shadow-lg">
               <picture>
@@ -293,12 +495,12 @@
     <section id="finder" class="py-16 sm:py-24 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center mb-12">
-          <p class="text-xs font-bold uppercase tracking-wider text-blue-600">Interactive Blueprint Builder</p>
+          <p class="text-xs font-bold uppercase tracking-wider text-blue-600">Solution finder</p>
           <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-            Find the Right AI Setup for Your Business
+            Find a starting setup for your organization
           </h2>
           <p class="mt-3 text-base text-slate-600">
-            Tell us your sector, daily bottlenecks, and workload to generate an instant custom AI plan and estimated time savings.
+            Tell us your sector, the bottlenecks, and the workload. We will sketch a starting plan and a rough time-saved estimate.
           </p>
         </div>
 
@@ -311,19 +513,21 @@
                 1. What type of business or organization do you run?
               </label>
               <select id="finder-sector" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm font-medium text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                <option value="Energy / Power Distribution" selected>Energy / Power Distribution</option>
+                <option value="Infrastructure / Field Operations">Infrastructure / Field Operations</option>
                 <option value="Small Business / Local Shop">Small Business / Local Shop</option>
                 <option value="Hospital / Clinic / Diagnostics">Hospital / Clinic / Diagnostics</option>
                 <option value="School / College / Coaching Institute">School / College / Coaching Institute</option>
                 <option value="Restaurant / Cafe / Food Business">Restaurant / Cafe / Food Business</option>
                 <option value="Retail / E-Commerce / Logistics">Retail / E-Commerce / Logistics</option>
                 <option value="Corporate / Agency / Enterprise">Corporate / Agency / Enterprise</option>
-                <option value="Other">Other Organization (Specify)</option>
+                <option value="Other">Other organization (specify)</option>
               </select>
               <div id="custom-sector-wrap" class="hidden mt-3">
                 <input
                   type="text"
                   id="custom-sector-input"
-                  placeholder="e.g., Fitness Studio, Real Estate Agency, NGO, Manufacturing..."
+                  placeholder="e.g., Fitness studio, real estate agency, NGO, logistics..."
                   class="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm text-slate-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                 />
               </div>
@@ -374,7 +578,7 @@
             <div class="flex items-center justify-between gap-2 pb-4 border-b border-slate-800">
               <div>
                 <p class="text-xs font-semibold uppercase tracking-wider text-teal-400">Your Recommended Stack</p>
-                <h3 id="blueprint-title" class="text-lg font-bold text-white mt-0.5">Small Business / Local Shop</h3>
+                <h3 id="blueprint-title" class="text-lg font-bold text-white mt-0.5">Energy / Power Distribution</h3>
               </div>
               <div class="w-10 h-10 rounded-xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0">
                 <i data-lucide="cpu" class="w-5 h-5"></i>
@@ -419,41 +623,41 @@
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           <div class="lg:col-span-6 order-2 lg:order-1">
-            <p class="text-xs font-bold uppercase tracking-wider text-blue-600">Simple 4-Step Launch</p>
+            <p class="text-xs font-bold uppercase tracking-wider text-blue-600">A simple four-step launch</p>
             <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-              From Idea to Working AI in Days, Not Months
+              From a first conversation to a working prototype
             </h2>
             <p class="mt-3 text-base text-slate-600">
-              You focus on running your business. We handle the AI design, connections to your existing tools (WhatsApp, phone, spreadsheets, POS, or hospital/school systems), and team onboarding.
+              You keep running the organization. We design the AI, connect it to the tools you already use — WhatsApp, phone, spreadsheets, or your existing systems — and onboard your team.
             </p>
 
             <div class="mt-8 space-y-5">
               <div class="flex gap-4">
                 <div class="w-9 h-9 rounded-full bg-blue-600 text-white font-bold text-sm flex items-center justify-center shrink-0">1</div>
                 <div>
-                  <h3 class="text-base font-bold text-slate-900">Free Workflow Audit</h3>
-                  <p class="text-sm text-slate-600 mt-0.5">We listen to your daily pain points and identify where AI delivers the fastest practical win.</p>
+                  <h3 class="text-base font-bold text-slate-900">Free workflow review</h3>
+                  <p class="text-sm text-slate-600 mt-0.5">We listen to the daily friction and pick the place where AI can help first.</p>
                 </div>
               </div>
               <div class="flex gap-4">
                 <div class="w-9 h-9 rounded-full bg-blue-600 text-white font-bold text-sm flex items-center justify-center shrink-0">2</div>
                 <div>
-                  <h3 class="text-base font-bold text-slate-900">Working Prototype</h3>
-                  <p class="text-sm text-slate-600 mt-0.5">Test a live demo trained on your services, menus, schedules, or FAQs before full rollout.</p>
+                  <h3 class="text-base font-bold text-slate-900">Working prototype</h3>
+                  <p class="text-sm text-slate-600 mt-0.5">Try a live demo trained on your services, schedules, or FAQs before a wider rollout.</p>
                 </div>
               </div>
               <div class="flex gap-4">
                 <div class="w-9 h-9 rounded-full bg-blue-600 text-white font-bold text-sm flex items-center justify-center shrink-0">3</div>
                 <div>
-                  <h3 class="text-base font-bold text-slate-900">Seamless Integration</h3>
-                  <p class="text-sm text-slate-600 mt-0.5">We plug into the tools you already use — no expensive software replacements required.</p>
+                  <h3 class="text-base font-bold text-slate-900">Integration</h3>
+                  <p class="text-sm text-slate-600 mt-0.5">We plug into the tools you already use. You do not have to replace your software.</p>
                 </div>
               </div>
               <div class="flex gap-4">
                 <div class="w-9 h-9 rounded-full bg-teal-600 text-white font-bold text-sm flex items-center justify-center shrink-0">4</div>
                 <div>
-                  <h3 class="text-base font-bold text-slate-900">Staff Training &amp; Ongoing Care</h3>
-                  <p class="text-sm text-slate-600 mt-0.5">Your team gets simple controls, clear dashboards, and continuous support as your business grows.</p>
+                  <h3 class="text-base font-bold text-slate-900">Training and ongoing care</h3>
+                  <p class="text-sm text-slate-600 mt-0.5">Your team gets simple controls, clear dashboards, and support as needs change.</p>
                 </div>
               </div>
             </div>
@@ -481,9 +685,9 @@
     <section id="faq" class="py-16 sm:py-24 bg-white border-t border-slate-200/80">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-10">
-          <p class="text-xs font-bold uppercase tracking-wider text-blue-600">Common Questions</p>
+          <p class="text-xs font-bold uppercase tracking-wider text-blue-600">Common questions</p>
           <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-            Frequently Asked Questions
+            Frequently asked questions
           </h2>
         </div>
 
@@ -499,13 +703,13 @@
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
           <div class="lg:col-span-5 space-y-6">
             <div class="inline-flex items-center gap-2 rounded-full bg-blue-500/15 border border-blue-400/30 px-3.5 py-1 text-xs font-semibold text-blue-300">
-              <span>Let's Build Together</span>
+              <span>Let's talk</span>
             </div>
             <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
-              Ready to Bring AI Into Your Business?
+              Ready to try a product or plan a custom build?
             </h2>
             <p class="text-slate-300 text-base leading-relaxed">
-              Share a quick note about your organization and what you'd like to automate. Whether you're a solo shop owner, a school principal, a clinic director, or a company founder, we'll reply with practical next steps.
+              Send a short note about your organization and what you would like to automate. We will reply with practical next steps — whether you want a walkthrough of Bill Mitra or Netra Command, or a custom assistant.
             </p>
             <div class="space-y-4 pt-2">
               <div class="flex items-start gap-3.5">
@@ -513,8 +717,8 @@
                   <i data-lucide="globe" class="w-5 h-5"></i>
                 </div>
                 <div>
-                  <p class="text-sm font-bold text-white">Any Business, Anywhere</p>
-                  <p class="text-xs text-slate-400 mt-0.5">Serving local small businesses and multi-location organizations across industries.</p>
+                  <p class="text-sm font-bold text-white">Any organization</p>
+                  <p class="text-xs text-slate-400 mt-0.5">From a local shop to a larger organization, we design around your workflow.</p>
                 </div>
               </div>
               <div class="flex items-start gap-3.5">
@@ -522,8 +726,8 @@
                   <i data-lucide="shield-check" class="w-5 h-5"></i>
                 </div>
                 <div>
-                  <p class="text-sm font-bold text-white">Privacy-First Architecture</p>
-                  <p class="text-xs text-slate-400 mt-0.5">Your customer records, patient data, and school info stay strictly isolated to your account.</p>
+                  <p class="text-sm font-bold text-white">Privacy first</p>
+                  <p class="text-xs text-slate-400 mt-0.5">Your records stay isolated to your organization, with a clear hand-off to your staff when needed.</p>
                 </div>
               </div>
               <div class="flex items-start gap-3.5">
@@ -565,11 +769,13 @@
                 <div>
                   <label for="contact-industry" class="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-1.5">Industry</label>
                   <select id="contact-industry" class="w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+                    <option value="Energy / Power Distribution">Energy / Power Distribution</option>
+                    <option value="Infrastructure / Field Operations">Infrastructure / Field Operations</option>
                     <option value="Small Business">Small Business</option>
                     <option value="Hospital / Clinic">Hospital / Clinic</option>
                     <option value="School / Education">School / Education</option>
-                    <option value="Food & Restaurants">Food &amp; Restaurants</option>
-                    <option value="Retail & Services">Retail &amp; Services</option>
+                    <option value="Food &amp; Restaurants">Food &amp; Restaurants</option>
+                    <option value="Retail &amp; Services">Retail &amp; Services</option>
                     <option value="Other Organization">Other Organization</option>
                   </select>
                 </div>
@@ -607,19 +813,20 @@
   <!-- Footer -->
   <footer class="bg-slate-950 text-slate-400 py-10 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-      <div class="flex items-center gap-2.5">
-        <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-blue-600 to-teal-500 flex items-center justify-center">
-          <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M12 12c-2-2.67-4-4-6.5-4a4.5 4.5 0 1 0 0 9c2.5 0 4.5-1.33 6.5-4 2 2.67 4 4 6.5 4a4.5 4.5 0 1 0 0-9c-2.5 0-4.5 1.33-6.5 4"/>
+      <div class="flex items-center gap-3">
+        <a href="#top" class="am-brand am-brand-on-dark" aria-label="AM∞ home">
+          <span class="am-letters" aria-hidden="true">AM</span>
+          <svg class="am-infinity-svg" viewBox="0 0 100 50" aria-hidden="true" focusable="false">
+            <path class="am-infinity-base" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
+            <path class="am-infinity-flow" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
           </svg>
-        </div>
-        <span class="text-sm font-bold text-white">AM<span class="text-blue-400 brand-infinity">∞</span></span>
-        <span class="text-xs text-slate-500 ml-2">&copy; 2026 AM∞. Practical AI for every business.</span>
+        </a>
+        <span class="text-xs text-slate-500">&copy; 2026 AM∞. Practical AI for every business.</span>
       </div>
       <div class="flex flex-wrap items-center gap-5 text-xs font-medium">
-        <a href="#industries" class="hover:text-white transition-colors">Industries</a>
+        <a href="#products" class="hover:text-white transition-colors">Products</a>
         <a href="#solutions" class="hover:text-white transition-colors">Solutions</a>
-        <a href="#finder" class="hover:text-white transition-colors">AI Finder</a>
+        <a href="#industries" class="hover:text-white transition-colors">Industries</a>
         <a href="#faq" class="hover:text-white transition-colors">FAQ</a>
         <a href="#contact" class="hover:text-white transition-colors">Contact</a>
         <a href="mailto:aiforbusiness.desk@gmail.com" class="text-blue-400 hover:text-blue-300 transition-colors">aiforbusiness.desk@gmail.com</a>
@@ -632,8 +839,8 @@
     <div class="w-full max-w-lg rounded-2xl bg-white shadow-2xl border border-slate-200 overflow-hidden">
       <div class="flex items-center justify-between px-6 py-4 border-b border-slate-200 bg-slate-50">
         <div>
-          <h3 class="text-base font-bold text-slate-900">Book Your Free AI Demo</h3>
-          <p class="text-xs text-slate-500">We'll tailor a live walkthrough for your exact business.</p>
+          <h3 class="text-base font-bold text-slate-900">Book a free demo</h3>
+          <p class="text-xs text-slate-500">We will tailor a short walkthrough for your organization.</p>
         </div>
         <button type="button" id="close-modal-btn" aria-label="Close modal" class="p-1.5 rounded-lg text-slate-500 hover:bg-slate-200/70 hover:text-slate-900">
           <i data-lucide="x" class="w-5 h-5"></i>
@@ -674,16 +881,46 @@
     // ---------- Data ----------
     const INDUSTRIES = [
       {
+        id: 'energy-utilities',
+        category: 'Energy & Utilities',
+        icon: 'zap',
+        color: 'amber',
+        featured: true,
+        product: { name: 'Bill Mitra', href: '#bill-mitra' },
+        title: 'Energy & power distribution',
+        summary: 'Help consumers understand a power bill in clear Telugu, and give utilities a practical way to explain charges.',
+        useCases: [
+          'Photograph a TSSPDCL or TSNPDCL-style bill',
+          'Key fields extracted, charges explained with voice',
+          'A next-bill estimate the consumer can share'
+        ]
+      },
+      {
+        id: 'infrastructure-ops',
+        category: 'Infrastructure & Field Ops',
+        icon: 'satellite',
+        color: 'teal',
+        featured: true,
+        product: { name: 'Netra Command', href: '#netra-command' },
+        title: 'Infrastructure and field operations',
+        summary: 'Turn drone and satellite observations into a prioritized incident and a crew dispatch — with a voice alert.',
+        useCases: [
+          'GridWatch: fault detection on drone imagery of power-line assets',
+          'Bhumi-Eye: satellite change detection on land and water',
+          'One command core: priority, dispatch, and voice alert'
+        ]
+      },
+      {
         id: 'small-business',
         category: 'Small Businesses',
         icon: 'store',
         color: 'blue',
-        title: 'Small & Local Businesses',
-        summary: 'Never miss a customer call or message again — automate front-desk inquiries, quotes, and billing.',
+        title: 'Small and local businesses',
+        summary: 'An assistant for front-desk inquiries, quotes, and billing follow-ups — on the phone and on WhatsApp.',
         useCases: [
-          '24/7 WhatsApp & phone inquiry assistant',
-          'Instant quote & appointment booking',
-          'Automated invoice follow-ups & CRM updates'
+          'WhatsApp and phone inquiry assistant',
+          'Quote and appointment booking',
+          'Invoice follow-ups and simple CRM updates'
         ]
       },
       {
@@ -691,12 +928,12 @@
         category: 'Hospitals & Clinics',
         icon: 'heart-pulse',
         color: 'teal',
-        title: 'Hospitals, Clinics & Labs',
-        summary: 'Reduce front-desk congestion and give patients instant, clear answers in their preferred language.',
+        title: 'Hospitals, clinics, and labs',
+        summary: 'Give patients clear answers in their preferred language, and take pressure off the front desk.',
         useCases: [
-          'AI voice desk for doctor slots & lab bookings',
-          'Automated pre-visit & follow-up reminders',
-          'Smart patient query routing & report dispatch'
+          'Voice desk for doctor slots and lab bookings',
+          'Pre-visit and follow-up reminders',
+          'Query routing and report dispatch'
         ]
       },
       {
@@ -704,12 +941,12 @@
         category: 'Schools & Education',
         icon: 'graduation-cap',
         color: 'indigo',
-        title: 'Schools, Colleges & Institutes',
-        summary: 'Streamline admissions, parent communication, and daily administrative tasks without extra headcount.',
+        title: 'Schools, colleges, and institutes',
+        summary: 'Streamline admissions, parent communication, and routine admin without adding headcount.',
         useCases: [
-          'Admissions & course counselor chatbot/voice bot',
-          'Automated parent notices, attendance & fee alerts',
-          'Smart timetable & exam schedule assistant'
+          'Admissions and course-counselor chatbot or voice bot',
+          'Parent notices, attendance, and fee alerts',
+          'Timetable and exam-schedule assistant'
         ]
       },
       {
@@ -717,12 +954,12 @@
         category: 'Food & Restaurants',
         icon: 'utensils',
         color: 'amber',
-        title: 'Restaurants, Cafes & Cloud Kitchens',
-        summary: 'Capture every table booking and direct delivery order while cutting food waste and peak-hour chaos.',
+        title: 'Restaurants, cafes, and cloud kitchens',
+        summary: 'Take table bookings and direct orders, and keep peak hours easier to manage.',
         useCases: [
-          'WhatsApp & voice order-taking with menu upsells',
-          'Instant table reservations & waitlist alerts',
-          'Daily demand & ingredient stock forecasting'
+          'WhatsApp and voice order-taking, with menu upsells',
+          'Table reservations and waitlist alerts',
+          'Daily demand and ingredient-stock forecasting'
         ]
       },
       {
@@ -730,12 +967,12 @@
         category: 'Retail & Services',
         icon: 'shopping-bag',
         color: 'emerald',
-        title: 'Retail, Salons & Service Brands',
-        summary: 'Turn one-time buyers into loyal repeat customers with personalized AI shopping and booking help.',
+        title: 'Retail, salons, and service brands',
+        summary: 'Help shoppers find what they need, and follow up after a visit or an order.',
         useCases: [
-          'Smart product finder & stock availability bot',
-          'Automated service reminders & feedback collection',
-          'Order tracking & instant return/exchange support'
+          'Product finder and stock-availability bot',
+          'Service reminders and feedback collection',
+          'Order tracking and return or exchange support'
         ]
       },
       {
@@ -743,12 +980,12 @@
         category: 'Any Custom Org',
         icon: 'building-2',
         color: 'slate',
-        title: 'Any Company or Organization',
-        summary: 'Real estate, logistics, NGOs, manufacturing, or offices — we build custom AI around your exact processes.',
+        title: 'Any company or organization',
+        summary: 'Real estate, logistics, NGOs, or offices — we build custom AI around your exact processes.',
         useCases: [
-          'Private AI assistant trained on your internal docs',
-          'Automated data entry from PDFs, forms & emails',
-          'Custom operational dashboards & workflow triggers'
+          'A private assistant trained on your internal documents',
+          'Data entry from PDFs, forms, and emails',
+          'Operational dashboards and workflow triggers'
         ]
       }
     ];
@@ -759,7 +996,7 @@
         label: 'Voice Agents',
         icon: 'phone-call',
         title: '24/7 Multilingual AI Voice Receptionist',
-        desc: 'Answers incoming phone calls naturally in English, Hindi, Telugu, and more — books appointments, answers FAQs, and escalates urgent calls to your staff.',
+        desc: 'Answers incoming calls in English, Hindi, Telugu, and more — books appointments, answers frequent questions, and hands urgent calls to your staff.',
         tags: ['Phone Integration', 'Zero Hold Time', 'Call Summaries'],
         previewRole: 'Live Call Transcript Example (Clinic)',
         messages: [
@@ -774,7 +1011,7 @@
         label: 'WhatsApp & Web',
         icon: 'message-square',
         title: 'Smart WhatsApp & Website Assistants',
-        desc: 'Engage customers where they already message you. Share catalogs, take food or retail orders, answer admission queries, and qualify leads automatically.',
+        desc: 'Meet customers where they already message you. Share catalogues, take orders, answer admission questions, and capture leads.',
         tags: ['WhatsApp Business', 'Website Widget', 'Lead Capture'],
         previewRole: 'WhatsApp Chat Example (Restaurant)',
         messages: [
@@ -789,7 +1026,7 @@
         label: 'Workflow AI',
         icon: 'workflow',
         title: 'Document & Back-Office Automation',
-        desc: 'Eliminate repetitive copy-pasting. Extract data from invoices, patient forms, or student records and sync automatically with spreadsheets, CRMs, or billing tools.',
+        desc: 'Cut repetitive copy-pasting. Extract data from invoices, forms, or records and sync it with spreadsheets, CRMs, or billing tools.',
         tags: ['Invoice Parsing', 'Auto-Reminders', 'CRM & Sheets Sync'],
         previewRole: 'Automated Workflow Example (Small Business)',
         messages: [
@@ -803,7 +1040,7 @@
         label: 'Smart Insights',
         icon: 'bar-chart-3',
         title: 'Plain-English Business Insights',
-        desc: 'Ask simple questions about your sales, peak hours, inventory, or customer feedback — get instant answers and daily summaries without complex spreadsheets.',
+        desc: 'Ask plain questions about sales, peak hours, inventory, or feedback — and get a short answer or a daily summary, without a complex spreadsheet.',
         tags: ['Demand Forecasting', 'Daily Digest', 'Ask Your Data'],
         previewRole: 'Owner Q&A Example (Retail / Food)',
         messages: [
@@ -824,24 +1061,32 @@
 
     const FAQS = [
       {
-        q: 'My business is not a hospital, school, or restaurant — can you still help us?',
-        a: 'Yes! We build AI solutions for any business or organization — including retail shops, salons, real estate, logistics, agencies, manufacturers, NGOs, and corporate teams. Every solution is tailored around your exact workflow.'
+        q: 'Are Bill Mitra and Netra Command official government or DISCOM services?',
+        a: 'No. Both are demos / concepts from AM∞ — not official TSSPDCL, TSNPDCL, or government services. Netra Command is not field-validated; a human review is required.'
+      },
+      {
+        q: 'Can I try the products now?',
+        a: 'Yes. Bill Mitra and Netra Command are both live. Use the Open live demo links in the Products section. For a walkthrough, book a short demo with us.'
+      },
+      {
+        q: 'My organization is not in energy or infrastructure — can you still help?',
+        a: 'Yes. We also build custom AI for shops, clinics, schools, restaurants, retail, logistics, agencies, NGOs, and offices. Every solution is tailored around your workflow.'
       },
       {
         q: 'Do we need an IT team or coding skills to use AM∞?',
-        a: 'Not at all. We handle setup, integration, and testing end-to-end. Your team interacts with simple dashboards, WhatsApp, or your existing tools with minimal training.'
+        a: 'No. We handle setup, integration, and testing. Your team uses simple dashboards, WhatsApp, or the tools you already have, with light training.'
       },
       {
-        q: 'Can your AI work with WhatsApp, phone calls, and Google Sheets?',
-        a: 'Yes. We connect directly with phone lines, WhatsApp Business, websites, Google Workspace, spreadsheets, and common POS, clinic, or school management tools.'
+        q: 'Can this work with WhatsApp, phone calls, and Google Sheets?',
+        a: 'Yes. We can connect phone lines, WhatsApp Business, websites, Google Workspace, spreadsheets, and common POS, clinic, or school tools.'
       },
       {
-        q: 'How fast can we launch our first AI solution?',
-        a: 'Most starter setups — such as a WhatsApp assistant, booking desk, or FAQ voice agent — can be prototyped in days and launched within 1 to 2 weeks.'
+        q: 'How quickly can we launch a first custom solution?',
+        a: 'A starter setup — such as a WhatsApp assistant, a booking desk, or an FAQ voice agent — can usually be prototyped in days and launched in one to two weeks.'
       },
       {
-        q: 'Is our business and customer data kept private?',
-        a: 'Yes. Your data is isolated to your organization and used strictly to power your workflows, with role-based controls and clear escalation rules to human staff.'
+        q: 'Is our data kept private?',
+        a: 'Yes. Your data stays isolated to your organization and is used only to run your workflows, with role-based access and a clear hand-off to your staff.'
       }
     ];
 
@@ -849,7 +1094,7 @@
     const state = {
       activeIndustryFilter: 'All',
       activeSolutionId: 'voice',
-      finderSector: 'Small Business / Local Shop',
+      finderSector: 'Energy / Power Distribution',
       customSector: '',
       selectedChallenges: new Set(['calls', 'bookings']),
       dailyInquiries: 40,
@@ -886,7 +1131,7 @@
     // ---------- Render Industries ----------
     function renderIndustryFilters() {
       const container = document.getElementById('industry-filters');
-      const categories = ['All', ...INDUSTRIES.map(i => i.category)];
+      const categories = ['All', ...new Set(INDUSTRIES.map(i => i.category))];
       container.innerHTML = categories.map(cat => {
         const active = state.activeIndustryFilter === cat;
         return `
@@ -917,14 +1162,34 @@
         ? INDUSTRIES
         : INDUSTRIES.filter(i => i.category === state.activeIndustryFilter);
 
-      grid.innerHTML = items.map(item => `
-        <article class="card-hover rounded-2xl bg-white border border-slate-200 p-6 flex flex-col justify-between">
+      grid.innerHTML = items.map(item => {
+        const featured = Boolean(item.featured && item.product);
+        const cta = featured
+          ? `<a href="${item.product.href}" class="w-full inline-flex items-center justify-center gap-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 text-xs font-bold transition-colors">
+              <span>See ${item.product.name}</span>
+              <i data-lucide="arrow-down" class="w-4 h-4"></i>
+            </a>`
+          : `<button
+              type="button"
+              data-industry-request="${item.title}"
+              class="industry-request-btn w-full inline-flex items-center justify-center gap-2 rounded-xl bg-slate-50 hover:bg-blue-50 text-slate-800 hover:text-blue-700 border border-slate-200 hover:border-blue-200 px-4 py-2.5 text-xs font-bold transition-colors"
+            >
+              <span>Request a setup</span>
+              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+            </button>`;
+        return `
+        <article class="card-hover rounded-2xl bg-white border p-6 flex flex-col justify-between ${
+          featured ? 'border-blue-200 ring-1 ring-blue-100 sm:col-span-1' : 'border-slate-200'
+        }">
           <div>
             <div class="flex items-center justify-between gap-3 mb-4">
               <div class="w-11 h-11 rounded-xl border flex items-center justify-center ${getBadgeClasses(item.color)}">
                 <i data-lucide="${item.icon}" class="w-5 h-5"></i>
               </div>
-              <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full border ${getBadgeClasses(item.color)}">${item.category}</span>
+              <div class="flex flex-wrap items-center justify-end gap-1.5">
+                ${featured ? '<span class="text-[10px] font-semibold uppercase tracking-wide text-teal-700 bg-teal-50 border border-teal-200 rounded-full px-2 py-0.5">Live product</span>' : ''}
+                <span class="text-[11px] font-semibold px-2.5 py-1 rounded-full border ${getBadgeClasses(item.color)}">${item.category}</span>
+              </div>
             </div>
             <h3 class="text-lg font-bold text-slate-900">${item.title}</h3>
             <p class="mt-2 text-sm text-slate-600 leading-relaxed">${item.summary}</p>
@@ -938,17 +1203,11 @@
             </ul>
           </div>
           <div class="mt-6 pt-4 border-t border-slate-100">
-            <button
-              type="button"
-              data-industry-request="${item.title}"
-              class="industry-request-btn w-full inline-flex items-center justify-center gap-2 rounded-xl bg-slate-50 hover:bg-blue-50 text-slate-800 hover:text-blue-700 border border-slate-200 hover:border-blue-200 px-4 py-2.5 text-xs font-bold transition-colors"
-            >
-              <span>Request Setup for ${item.category}</span>
-              <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
-            </button>
+            ${cta}
           </div>
         </article>
-      `).join('');
+      `;
+      }).join('');
 
       grid.querySelectorAll('.industry-request-btn').forEach(btn => {
         btn.addEventListener('click', () => {
