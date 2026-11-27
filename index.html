@@ -144,6 +144,118 @@
         opacity: 0;
       }
     }
+
+    /* Interactive infinity scroll rail */
+    .infinity-rail {
+      position: fixed;
+      right: 0.55rem;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 30;
+      width: 150px;
+      pointer-events: none;
+    }
+    .infinity-rail svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+      pointer-events: auto;
+      touch-action: none;
+      cursor: pointer;
+      outline: none;
+    }
+    .infinity-rail svg:focus-visible {
+      outline: 2px solid #2563eb;
+      outline-offset: 6px;
+      border-radius: 999px;
+    }
+    .inf-base {
+      fill: none;
+      stroke: #94a3b8;
+      stroke-width: 5.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      opacity: 0.45;
+    }
+    .inf-progress {
+      fill: none;
+      stroke: url(#inf-rail-grad);
+      stroke-width: 5.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: url(#inf-glow);
+    }
+    .inf-hot {
+      fill: none;
+      stroke: url(#inf-rail-grad);
+      stroke-width: 7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: url(#inf-glow-strong);
+      opacity: 0.95;
+    }
+    .inf-flash {
+      fill: none;
+      stroke: url(#inf-rail-grad);
+      stroke-width: 7.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: url(#inf-glow-strong);
+      opacity: 0;
+      pointer-events: none;
+    }
+    .inf-knob {
+      fill: #ffffff;
+      stroke: url(#inf-rail-grad);
+      stroke-width: 2.6;
+      filter: url(#inf-glow-strong);
+      pointer-events: none;
+    }
+    .inf-knob-hit {
+      fill: transparent;
+      stroke: none;
+      pointer-events: all;
+      cursor: grab;
+    }
+    .infinity-rail.is-dragging .inf-knob-hit,
+    .infinity-rail.is-dragging svg {
+      cursor: grabbing;
+    }
+    .infinity-rail.is-hovering .inf-base,
+    .infinity-rail.is-dragging .inf-base {
+      opacity: 0.22;
+    }
+    .infinity-rail.is-hovering .inf-progress,
+    .infinity-rail.is-dragging .inf-progress {
+      opacity: 0.35;
+    }
+    .infinity-rail.is-pulsing .inf-flash {
+      animation: inf-complete-pulse 1.15s ease-out 1;
+    }
+    @keyframes inf-complete-pulse {
+      0%   { opacity: 0; stroke-width: 6; }
+      30%  { opacity: 1; stroke-width: 9; }
+      100% { opacity: 0; stroke-width: 6; }
+    }
+    @media (max-width: 767px) {
+      .infinity-rail {
+        right: 0.1rem;
+        width: 78px;
+        top: auto;
+        bottom: 5.5rem;
+        transform: none;
+      }
+    }
+    @media (min-width: 768px) and (max-width: 1279px) {
+      .infinity-rail { width: 112px; right: 0.3rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .infinity-rail.is-pulsing .inf-flash {
+        animation: none;
+        opacity: 0.9;
+      }
+    }
   </style>
 </head>
 <body class="antialiased selection:bg-blue-100 selection:text-blue-900">
@@ -161,6 +273,41 @@
     <i data-lucide="check-circle-2" class="w-5 h-5 text-emerald-400 shrink-0"></i>
     <span id="toast-message">Action completed.</span>
   </div>
+
+
+  <!-- Interactive infinity scroll rail -->
+  <aside id="infinity-rail" class="infinity-rail">
+    <svg id="infinity-svg" viewBox="-10 -10 120 70" role="slider" aria-label="Page scroll position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+      <defs>
+        <linearGradient id="inf-rail-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#2563eb"/>
+          <stop offset="100%" stop-color="#0d9488"/>
+        </linearGradient>
+        <filter id="inf-glow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="1.4" result="b"/>
+          <feMerge>
+            <feMergeNode in="b"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+        <filter id="inf-glow-strong" x="-80%" y="-80%" width="260%" height="260%">
+          <feGaussianBlur stdDeviation="2.4" result="b"/>
+          <feMerge>
+            <feMergeNode in="b"/>
+            <feMergeNode in="b"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <path id="inf-hit" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25" fill="none" stroke="transparent" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
+      <path class="inf-base" id="inf-base" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
+      <path class="inf-progress" id="inf-progress" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
+      <path class="inf-hot" id="inf-hot" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
+      <path class="inf-flash" id="inf-flash" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
+      <circle class="inf-knob-hit" id="inf-knob-hit" r="10" cx="10" cy="25"/>
+      <circle class="inf-knob" id="inf-knob" r="4.2" cx="10" cy="25"/>
+    </svg>
+  </aside>
 
   <!-- Navigation -->
   <header class="sticky top-0 z-40 glass-nav border-b border-slate-200/80">
@@ -242,22 +389,9 @@
           </div>
         </div>
 
-        <!-- Hero Visual -->
-        <div class="mt-12 sm:mt-14 relative max-w-5xl mx-auto">
-          <div class="rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/90 shadow-2xl shadow-slate-900/10 bg-slate-900">
-            <picture>
-              <source srcset="assets/hero.webp" type="image/webp" />
-              <img
-                src="assets/hero.jpg"
-                width="1376"
-                height="768"
-                alt="Custom AI assistants connecting a cafe, clinic, school, and office"
-                class="w-full h-auto max-w-full object-cover" fetchpriority="high" decoding="async"
-              />
-            </picture>
-          </div>
-          <!-- Product teasers -->
-          <div class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <!-- Product teasers -->
+        <div class="mt-10 sm:mt-12 relative max-w-5xl mx-auto">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <a href="#bill-mitra" class="rounded-2xl bg-white border border-slate-200/80 p-4 flex items-center gap-3.5 shadow-sm card-hover">
               <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
                 <i data-lucide="file-text" class="w-5 h-5"></i>
@@ -286,6 +420,19 @@
               </div>
             </a>
           </div>
+          <div class="mt-6 rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/90 shadow-2xl shadow-slate-900/10 bg-slate-900">
+            <picture>
+              <source srcset="assets/hero.webp" type="image/webp" />
+              <img
+                src="assets/hero.jpg"
+                width="1376"
+                height="768"
+                alt="Custom AI assistants connecting a cafe, clinic, school, and office"
+                class="w-full h-auto max-w-full object-cover" fetchpriority="high" decoding="async"
+              />
+            </picture>
+          </div>
+
         </div>
       </div>
     </section>
@@ -316,7 +463,7 @@
                       width="1376"
                       height="774"
                       alt="Bill Mitra demo on a sample bill: charges explained in Telugu, total shown as zero after Gruha Jyothi. Demo / Concept – not an official TSSPDCL or TSNPDCL service."
-                      class="w-full h-auto max-w-full object-cover" loading="lazy" decoding="async"
+                      class="w-full h-auto max-w-full object-cover" loading="eager" decoding="async"
                     />
                   </picture>
                 </div>
@@ -364,7 +511,7 @@
                       width="1170"
                       height="1080"
                       alt="GridWatch demo: a bird nest detected on a power-line fitting in drone imagery."
-                      class="w-full h-auto max-w-full object-cover object-center max-h-64 sm:max-h-80" loading="lazy" decoding="async"
+                      class="w-full h-auto max-w-full object-cover object-center max-h-64 sm:max-h-80" loading="eager" decoding="async"
                     />
                   </picture>
                 </div>
@@ -376,7 +523,7 @@
                       width="1200"
                       height="331"
                       alt="Bhumi-Eye demo: before and after satellite scenes of a lake, with a change map. Indicative demo output, not official statistics."
-                      class="w-full h-auto max-w-full object-cover" loading="lazy" decoding="async"
+                      class="w-full h-auto max-w-full object-cover" loading="eager" decoding="async"
                     />
                   </picture>
                 </div>
@@ -419,7 +566,7 @@
         <div class="max-w-3xl">
           <p class="text-xs font-bold uppercase tracking-wider text-blue-600">Who we serve</p>
           <h2 class="mt-2 text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-            First, the industries our products already serve
+            First, the industries our products are built for
           </h2>
           <p class="mt-3 text-base text-slate-600">
             Bill Mitra is built for energy and power distribution. Netra Command is built for infrastructure and field operations. The same approach can be tailored for shops, clinics, schools, restaurants, and any other organization.
@@ -471,7 +618,7 @@
                 width="1200"
                 height="896"
                 alt="Modular AI components for voice reception, scheduling, analytics, and automation"
-                class="w-full h-auto max-w-full object-cover" loading="lazy" decoding="async"
+                class="w-full h-auto max-w-full object-cover" loading="eager" decoding="async"
               />
             </picture>
             </div>
@@ -672,7 +819,7 @@
                 width="1200"
                 height="896"
                 alt="Small business owner reviewing clear AI analytics on a tablet in a bright office"
-                class="w-full h-auto max-w-full object-cover" loading="lazy" decoding="async"
+                class="w-full h-auto max-w-full object-cover" loading="eager" decoding="async"
               />
             </picture>
             </div>
@@ -1556,5 +1703,227 @@ ${message}`);
       if (window.lucide) lucide.createIcons();
     });
   </script>
+
+  <script>
+    (function initInfinityRail() {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const rail = document.getElementById('infinity-rail');
+      const svg = document.getElementById('infinity-svg');
+      const path = document.getElementById('inf-base');
+      const progress = document.getElementById('inf-progress');
+      const hot = document.getElementById('inf-hot');
+      const knob = document.getElementById('inf-knob');
+      const knobHit = document.getElementById('inf-knob-hit');
+      const hit = document.getElementById('inf-hit');
+      if (!rail || !svg || !path || !progress || !hot || !knob) return;
+
+      const total = path.getTotalLength();
+      const hotLen = Math.max(18, total * 0.14);
+      let dragging = false;
+      let hovering = false;
+      let atEnd = false;
+      let travelled = 0;
+      let lastLen = 0;
+
+      function maxScroll() {
+        return Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+      }
+
+      function scrollT() {
+        return Math.min(1, Math.max(0, window.scrollY / maxScroll()));
+      }
+
+      function clientToSvg(evt) {
+        const src = (evt.touches && evt.touches[0]) || (evt.changedTouches && evt.changedTouches[0]) || evt;
+        const pt = svg.createSVGPoint();
+        pt.x = src.clientX;
+        pt.y = src.clientY;
+        const ctm = svg.getScreenCTM();
+        if (!ctm) return null;
+        return pt.matrixTransform(ctm.inverse());
+      }
+
+      function nearestLen(x, y) {
+        let best = 0;
+        let bestD = Infinity;
+        const steps = 260;
+        for (let i = 0; i <= steps; i++) {
+          const l = (i / steps) * total;
+          const p = path.getPointAtLength(l);
+          const d = (p.x - x) * (p.x - x) + (p.y - y) * (p.y - y);
+          if (d < bestD) {
+            bestD = d;
+            best = l;
+          }
+        }
+        const span = total / steps;
+        let lo = Math.max(0, best - span);
+        let hi = Math.min(total, best + span);
+        for (let k = 0; k < 10; k++) {
+          const m1 = lo + (hi - lo) / 3;
+          const m2 = hi - (hi - lo) / 3;
+          const p1 = path.getPointAtLength(m1);
+          const p2 = path.getPointAtLength(m2);
+          const d1 = (p1.x - x) * (p1.x - x) + (p1.y - y) * (p1.y - y);
+          const d2 = (p2.x - x) * (p2.x - x) + (p2.y - y) * (p2.y - y);
+          if (d1 < d2) hi = m2; else lo = m1;
+          if (d1 < bestD) { bestD = d1; best = m1; }
+          if (d2 < bestD) { bestD = d2; best = m2; }
+        }
+        return { len: best, dist: Math.sqrt(bestD) };
+      }
+
+      function setVisual(t) {
+        t = Math.min(1, Math.max(0, t));
+        const len = t * total;
+        const p = path.getPointAtLength(Math.min(Math.max(len, 0.01), total - 0.01));
+        knob.setAttribute('cx', p.x.toFixed(3));
+        knob.setAttribute('cy', p.y.toFixed(3));
+        knobHit.setAttribute('cx', p.x.toFixed(3));
+        knobHit.setAttribute('cy', p.y.toFixed(3));
+        progress.style.strokeDasharray = len + ' ' + total;
+        progress.style.strokeDashoffset = '0';
+        const hotStart = len - hotLen / 2;
+        hot.style.strokeDasharray = hotLen + ' ' + total;
+        hot.style.strokeDashoffset = String(-((hotStart % total) + total) % total);
+        svg.setAttribute('aria-valuenow', String(Math.round(t * 100)));
+        return t;
+      }
+
+      function triggerComplete() {
+        if (atEnd) return;
+        atEnd = true;
+        rail.classList.remove('is-pulsing');
+        void rail.offsetWidth;
+        rail.classList.add('is-pulsing');
+        if (reduceMotion) {
+          window.setTimeout(function () { rail.classList.remove('is-pulsing'); }, 1400);
+        } else {
+          window.setTimeout(function () { rail.classList.remove('is-pulsing'); }, 1200);
+        }
+      }
+
+      function noteTravel(len) {
+        let delta = len - lastLen;
+        if (delta > total / 2) delta -= total;
+        if (delta < -total / 2) delta += total;
+        travelled += Math.abs(delta);
+        lastLen = len;
+        if (travelled >= total * 0.96) {
+          travelled = 0;
+          triggerComplete();
+        }
+      }
+
+      function maybeEndFromT(t) {
+        if (t >= 0.995) triggerComplete();
+        else atEnd = false;
+      }
+
+      function onScrollOrResize() {
+        if (dragging || hovering) return;
+        const t = scrollT();
+        setVisual(t);
+        lastLen = t * total;
+        maybeEndFromT(t);
+      }
+
+      function startDrag(evt) {
+        dragging = true;
+        hovering = false;
+        travelled = 0;
+        rail.classList.add('is-dragging');
+        rail.classList.remove('is-hovering');
+        if (svg.setPointerCapture && evt.pointerId != null) {
+          try { svg.setPointerCapture(evt.pointerId); } catch (e) {}
+        }
+        moveDrag(evt);
+        evt.preventDefault();
+      }
+
+      function moveDrag(evt) {
+        if (!dragging) return;
+        const pt = clientToSvg(evt);
+        if (!pt) return;
+        const n = nearestLen(pt.x, pt.y);
+        const t = n.len / total;
+        setVisual(t);
+        noteTravel(n.len);
+        window.scrollTo(0, t * maxScroll());
+        maybeEndFromT(t);
+        evt.preventDefault();
+      }
+
+      function endDrag() {
+        if (!dragging) return;
+        dragging = false;
+        rail.classList.remove('is-dragging');
+        const t = scrollT();
+        setVisual(t);
+        lastLen = t * total;
+        maybeEndFromT(t);
+      }
+
+      function onPointerMove(evt) {
+        if (dragging) {
+          moveDrag(evt);
+          return;
+        }
+        if (evt.pointerType && evt.pointerType !== 'mouse') return;
+        const pt = clientToSvg(evt);
+        if (!pt) return;
+        const n = nearestLen(pt.x, pt.y);
+        if (n.dist < 16) {
+          hovering = true;
+          rail.classList.add('is-hovering');
+          setVisual(n.len / total);
+        } else if (hovering) {
+          hovering = false;
+          rail.classList.remove('is-hovering');
+          const t = scrollT();
+          setVisual(t);
+          lastLen = t * total;
+        }
+      }
+
+      function onPointerLeave() {
+        if (dragging) return;
+        hovering = false;
+        rail.classList.remove('is-hovering');
+        const t = scrollT();
+        setVisual(t);
+        lastLen = t * total;
+      }
+
+      svg.addEventListener('pointerdown', startDrag);
+      svg.addEventListener('pointermove', onPointerMove);
+      svg.addEventListener('pointerup', endDrag);
+      svg.addEventListener('pointercancel', endDrag);
+      svg.addEventListener('pointerleave', onPointerLeave);
+      svg.addEventListener('lostpointercapture', endDrag);
+
+      svg.addEventListener('keydown', function (evt) {
+        const step = 0.06;
+        let t = scrollT();
+        let used = true;
+        if (evt.key === 'ArrowRight' || evt.key === 'ArrowDown') t += step;
+        else if (evt.key === 'ArrowLeft' || evt.key === 'ArrowUp') t -= step;
+        else if (evt.key === 'Home') t = 0;
+        else if (evt.key === 'End') t = 1;
+        else used = false;
+        if (!used) return;
+        t = Math.min(1, Math.max(0, t));
+        window.scrollTo({ top: t * maxScroll(), behavior: reduceMotion ? 'auto' : 'smooth' });
+        setVisual(t);
+        maybeEndFromT(t);
+        evt.preventDefault();
+      });
+
+      window.addEventListener('scroll', onScrollOrResize, { passive: true });
+      window.addEventListener('resize', onScrollOrResize);
+      onScrollOrResize();
+    })();
+  </script>
+
 </body>
 </html>
