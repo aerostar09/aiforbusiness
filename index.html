@@ -145,115 +145,146 @@
       }
     }
 
-    /* Interactive infinity scroll rail */
-    .infinity-rail {
-      position: fixed;
-      right: 0.55rem;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 30;
-      width: 150px;
-      pointer-events: none;
+    /* Large interactive infinity — hero background */
+    #hero {
+      position: relative;
+      overflow: hidden;
     }
-    .infinity-rail svg {
-      display: block;
+    .infinity-bg {
+      position: absolute;
+      left: 50%;
+      top: 1.5rem;
+      transform: translateX(-50%) translateZ(0);
       width: 100%;
+      height: 26rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 0;
+      pointer-events: none;
+      isolation: isolate;
+    }
+    .infinity-bg svg {
+      display: block;
+      width: 90vw;
+      max-width: none;
       height: auto;
       overflow: visible;
-      pointer-events: auto;
-      touch-action: none;
-      cursor: pointer;
-      outline: none;
+      pointer-events: none;
     }
-    .infinity-rail svg:focus-visible {
-      outline: 2px solid #2563eb;
-      outline-offset: 6px;
-      border-radius: 999px;
-    }
-    .inf-base {
+    .infinity-bg .inf-base {
       fill: none;
-      stroke: #94a3b8;
-      stroke-width: 5.5;
+      stroke: #64748b;
+      stroke-width: 0.95;
       stroke-linecap: round;
       stroke-linejoin: round;
-      opacity: 0.45;
+      opacity: 0.34;
     }
-    .inf-progress {
+    .infinity-bg .inf-progress {
       fill: none;
-      stroke: url(#inf-rail-grad);
-      stroke-width: 5.5;
+      stroke: none;
+      stroke-width: 0.95;
+      stroke-linecap: butt;
+      stroke-linejoin: round;
+      filter: none;
+      display: none;
+      opacity: 0;
+    }
+    .infinity-bg.has-progress .inf-progress,
+    .infinity-bg.is-pulsing .inf-progress {
+      display: inline;
+      stroke-linecap: round;
+      filter: url(#inf-bg-glow);
+      opacity: 0.72;
+    }
+    .infinity-bg.is-hovering.has-progress .inf-progress,
+    .infinity-bg.is-dragging.has-progress .inf-progress {
+      opacity: 0.32;
+    }
+    .infinity-bg .inf-hot {
+      fill: none;
+      stroke: none;
+      stroke-width: 1.35;
       stroke-linecap: round;
       stroke-linejoin: round;
-      filter: url(#inf-glow);
+      filter: none;
+      display: none;
+      opacity: 0;
     }
-    .inf-hot {
-      fill: none;
-      stroke: url(#inf-rail-grad);
-      stroke-width: 7;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      filter: url(#inf-glow-strong);
+    .infinity-bg.is-hovering .inf-hot,
+    .infinity-bg.is-dragging .inf-hot {
+      display: inline;
+      filter: url(#inf-bg-glow-strong);
       opacity: 0.95;
     }
-    .inf-flash {
+    .infinity-bg .inf-flash {
       fill: none;
-      stroke: url(#inf-rail-grad);
-      stroke-width: 7.5;
+      stroke: none;
+      stroke-width: 1.35;
       stroke-linecap: round;
       stroke-linejoin: round;
-      filter: url(#inf-glow-strong);
+      filter: none;
+      display: none;
       opacity: 0;
       pointer-events: none;
     }
-    .inf-knob {
-      fill: #ffffff;
-      stroke: url(#inf-rail-grad);
-      stroke-width: 2.6;
-      filter: url(#inf-glow-strong);
-      pointer-events: none;
+    .infinity-bg.is-pulsing .inf-flash {
+      display: inline;
+      filter: url(#inf-bg-glow-strong);
     }
-    .inf-knob-hit {
-      fill: transparent;
+    .infinity-bg .inf-knob {
+      fill: none;
       stroke: none;
-      pointer-events: all;
-      cursor: grab;
+      stroke-width: 0.35;
+      filter: none;
+      display: none;
     }
-    .infinity-rail.is-dragging .inf-knob-hit,
-    .infinity-rail.is-dragging svg {
-      cursor: grabbing;
+    .infinity-bg.is-hovering .inf-knob,
+    .infinity-bg.is-dragging .inf-knob {
+      display: inline;
+      fill: #ffffff;
+      filter: url(#inf-bg-glow-strong);
     }
-    .infinity-rail.is-hovering .inf-base,
-    .infinity-rail.is-dragging .inf-base {
-      opacity: 0.22;
+    .infinity-bg.is-hovering .inf-base,
+    .infinity-bg.is-dragging .inf-base {
+      opacity: 0.18;
     }
-    .infinity-rail.is-hovering .inf-progress,
-    .infinity-rail.is-dragging .inf-progress {
-      opacity: 0.35;
+    .infinity-bg.is-hovering .inf-progress,
+    .infinity-bg.is-dragging .inf-progress {
+      opacity: 0.32;
     }
-    .infinity-rail.is-pulsing .inf-flash {
-      animation: inf-complete-pulse 1.15s ease-out 1;
+    .infinity-bg.is-pulsing .inf-flash {
+      animation: inf-complete-pulse 1.2s ease-out 1;
+    }
+    .infinity-bg.is-pulsing .inf-knob,
+    .infinity-bg.is-pulsing .inf-hot {
+      display: none;
+    }
+    .infinity-bg.is-pulsing .inf-base,
+    .infinity-bg.is-pulsing .inf-progress,
+    .infinity-bg.is-pulsing .inf-hot {
+      opacity: 0.15;
     }
     @keyframes inf-complete-pulse {
-      0%   { opacity: 0; stroke-width: 6; }
-      30%  { opacity: 1; stroke-width: 9; }
-      100% { opacity: 0; stroke-width: 6; }
+      0%   { opacity: 0; stroke-width: 1.1; }
+      28%  { opacity: 0.95; stroke-width: 1.7; }
+      100% { opacity: 0; stroke-width: 1.1; }
     }
+    #hero.is-dragging { cursor: grabbing; }
+    #hero.is-dragging * { cursor: grabbing; }
     @media (max-width: 767px) {
-      .infinity-rail {
-        right: 0.1rem;
-        width: 78px;
-        top: auto;
-        bottom: 5.5rem;
-        transform: none;
-      }
+      .infinity-bg { height: 22rem; top: 4.5rem; }
+      .infinity-bg svg { width: 98vw; }
     }
-    @media (min-width: 768px) and (max-width: 1279px) {
-      .infinity-rail { width: 112px; right: 0.3rem; }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .infinity-bg { height: 24rem; }
+      .infinity-bg svg { width: 94vw; }
     }
     @media (prefers-reduced-motion: reduce) {
-      .infinity-rail.is-pulsing .inf-flash {
+      .infinity-bg.is-pulsing .inf-flash {
         animation: none;
-        opacity: 0.9;
+        opacity: 0.85;
+        stroke-width: 1.4;
       }
     }
   </style>
@@ -274,40 +305,6 @@
     <span id="toast-message">Action completed.</span>
   </div>
 
-
-  <!-- Interactive infinity scroll rail -->
-  <aside id="infinity-rail" class="infinity-rail">
-    <svg id="infinity-svg" viewBox="-10 -10 120 70" role="slider" aria-label="Page scroll position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
-      <defs>
-        <linearGradient id="inf-rail-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#2563eb"/>
-          <stop offset="100%" stop-color="#0d9488"/>
-        </linearGradient>
-        <filter id="inf-glow" x="-50%" y="-50%" width="200%" height="200%">
-          <feGaussianBlur stdDeviation="1.4" result="b"/>
-          <feMerge>
-            <feMergeNode in="b"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-        <filter id="inf-glow-strong" x="-80%" y="-80%" width="260%" height="260%">
-          <feGaussianBlur stdDeviation="2.4" result="b"/>
-          <feMerge>
-            <feMergeNode in="b"/>
-            <feMergeNode in="b"/>
-            <feMergeNode in="SourceGraphic"/>
-          </feMerge>
-        </filter>
-      </defs>
-      <path id="inf-hit" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25" fill="none" stroke="transparent" stroke-width="18" stroke-linecap="round" stroke-linejoin="round"/>
-      <path class="inf-base" id="inf-base" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
-      <path class="inf-progress" id="inf-progress" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
-      <path class="inf-hot" id="inf-hot" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
-      <path class="inf-flash" id="inf-flash" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
-      <circle class="inf-knob-hit" id="inf-knob-hit" r="10" cx="10" cy="25"/>
-      <circle class="inf-knob" id="inf-knob" r="4.2" cx="10" cy="25"/>
-    </svg>
-  </aside>
 
   <!-- Navigation -->
   <header class="sticky top-0 z-40 glass-nav border-b border-slate-200/80">
@@ -364,8 +361,13 @@
 
   <main id="top">
     <!-- Hero Section -->
-    <section class="hero-gradient pt-12 pb-16 sm:pt-16 sm:pb-24 border-b border-slate-200/70">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="hero" class="hero-gradient pt-12 pb-16 sm:pt-16 sm:pb-24 border-b border-slate-200/70">
+      <div class="infinity-bg" id="infinity-bg" aria-hidden="true">
+        <svg id="infinity-svg" viewBox="5 6 90 38" focusable="false">
+          <path class="inf-base" id="inf-base" d="M10,25 C10,10 30,10 50,25 C70,40 90,40 90,25 C90,10 70,10 50,25 C30,40 10,40 10,25"/>
+        </svg>
+      </div>
+      <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="max-w-3xl mx-auto text-center">
           <div class="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-200/80 px-3.5 py-1.5 text-xs font-semibold text-blue-700 mb-6">
             <span class="w-2 h-2 rounded-full bg-teal-500"></span>
@@ -1705,25 +1707,101 @@ ${message}`);
   </script>
 
   <script>
-    (function initInfinityRail() {
+    (function initInfinityBg() {
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      const rail = document.getElementById('infinity-rail');
+      const hero = document.getElementById('hero');
+      const stage = document.getElementById('infinity-bg');
       const svg = document.getElementById('infinity-svg');
       const path = document.getElementById('inf-base');
-      const progress = document.getElementById('inf-progress');
-      const hot = document.getElementById('inf-hot');
-      const knob = document.getElementById('inf-knob');
-      const knobHit = document.getElementById('inf-knob-hit');
-      const hit = document.getElementById('inf-hit');
-      if (!rail || !svg || !path || !progress || !hot || !knob) return;
+      if (!hero || !stage || !svg || !path) return;
 
       const total = path.getTotalLength();
-      const hotLen = Math.max(18, total * 0.14);
+      const hotLen = Math.max(12, total * 0.16);
+      const PATH_D = path.getAttribute('d');
+      const KNOB_R = '1.55';
+      const svgNS = 'http://www.w3.org/2000/svg';
       let dragging = false;
       let hovering = false;
       let atEnd = false;
       let travelled = 0;
       let lastLen = 0;
+      let activePointer = null;
+
+      function makePath(id, cls) {
+        const el = document.createElementNS(svgNS, 'path');
+        el.setAttribute('id', id);
+        el.setAttribute('class', cls);
+        el.setAttribute('d', PATH_D);
+        el.setAttribute('fill', 'none');
+        return el;
+      }
+      function makeKnob() {
+        const el = document.createElementNS(svgNS, 'circle');
+        el.setAttribute('id', 'inf-knob');
+        el.setAttribute('class', 'inf-knob');
+        el.setAttribute('r', KNOB_R);
+        el.setAttribute('cx', '10');
+        el.setAttribute('cy', '25');
+        el.setAttribute('fill', '#ffffff');
+        return el;
+      }
+      const progress = makePath('inf-progress', 'inf-progress');
+      const hot = makePath('inf-hot', 'inf-hot');
+      const flash = makePath('inf-flash', 'inf-flash');
+      const knob = makeKnob();
+
+      // Chrome still paints filtered SVG strokes (and even empty sibling paths
+      // after the base path) when those layers are hidden with CSS. Mount them
+      // only while they should be visible.
+      function ensureFxDefs(on) {
+        let defs = svg.querySelector('#inf-fx-defs');
+        if (on) {
+          if (defs) return;
+          defs = document.createElementNS(svgNS, 'defs');
+          defs.setAttribute('id', 'inf-fx-defs');
+          defs.innerHTML = ''
+            + '<linearGradient id="inf-bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">'
+            + '<stop offset="0%" stop-color="#2563eb"/>'
+            + '<stop offset="100%" stop-color="#0d9488"/>'
+            + '</linearGradient>'
+            + '<filter id="inf-bg-glow" x="-40%" y="-40%" width="180%" height="180%">'
+            + '<feGaussianBlur stdDeviation="0.55" result="b"/>'
+            + '<feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>'
+            + '</filter>'
+            + '<filter id="inf-bg-glow-strong" x="-60%" y="-60%" width="220%" height="220%">'
+            + '<feGaussianBlur stdDeviation="0.9" result="b"/>'
+            + '<feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>'
+            + '</filter>';
+          svg.insertBefore(defs, svg.firstChild);
+        } else if (defs) {
+          defs.remove();
+        }
+      }
+      function mount(el, on) {
+        if (on) {
+          ensureFxDefs(true);
+          el.style.stroke = 'url(#inf-bg-grad)';
+          if (el.parentNode !== svg) svg.appendChild(el);
+        } else {
+          el.style.stroke = 'none';
+          if (el.parentNode) el.parentNode.removeChild(el);
+        }
+      }
+      function pruneFxDefs() {
+        if (!progress.parentNode && !hot.parentNode && !flash.parentNode && !knob.parentNode) {
+          ensureFxDefs(false);
+        }
+      }
+      function applyLayerGeometry(fillLen) {
+        const pulse = stage.classList.contains('is-pulsing');
+        const hover = stage.classList.contains('is-hovering') || stage.classList.contains('is-dragging');
+        const showProgress = pulse || fillLen >= 1.2;
+        mount(progress, showProgress);
+        mount(hot, hover && !pulse);
+        mount(flash, pulse);
+        mount(knob, hover && !pulse);
+        pruneFxDefs();
+      }
 
       function maxScroll() {
         return Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
@@ -1731,6 +1809,10 @@ ${message}`);
 
       function scrollT() {
         return Math.min(1, Math.max(0, window.scrollY / maxScroll()));
+      }
+
+      function isInteractive(el) {
+        return !!(el && el.closest && el.closest('a, button, input, select, textarea, label, summary, [role="button"]'));
       }
 
       function clientToSvg(evt) {
@@ -1743,10 +1825,16 @@ ${message}`);
         return pt.matrixTransform(ctm.inverse());
       }
 
+      function pixelScale() {
+        const ctm = svg.getScreenCTM();
+        if (!ctm) return 1;
+        return Math.hypot(ctm.a, ctm.b) || 1;
+      }
+
       function nearestLen(x, y) {
         let best = 0;
         let bestD = Infinity;
-        const steps = 260;
+        const steps = 280;
         for (let i = 0; i <= steps; i++) {
           const l = (i / steps) * total;
           const p = path.getPointAtLength(l);
@@ -1773,34 +1861,36 @@ ${message}`);
         return { len: best, dist: Math.sqrt(bestD) };
       }
 
-      function setVisual(t) {
+      function setVisual(t, opts) {
         t = Math.min(1, Math.max(0, t));
-        const len = t * total;
-        const p = path.getPointAtLength(Math.min(Math.max(len, 0.01), total - 0.01));
+        const showKnob = !opts || opts.knob !== false;
+        const knobT = (opts && opts.knobT != null) ? opts.knobT : t;
+        const fillLen = t * total;
+        const knobLen = Math.min(Math.max(knobT * total, 0.01), total - 0.01);
+        const p = path.getPointAtLength(knobLen);
         knob.setAttribute('cx', p.x.toFixed(3));
         knob.setAttribute('cy', p.y.toFixed(3));
-        knobHit.setAttribute('cx', p.x.toFixed(3));
-        knobHit.setAttribute('cy', p.y.toFixed(3));
-        progress.style.strokeDasharray = len + ' ' + total;
+        progress.style.strokeDasharray = fillLen + ' ' + total;
         progress.style.strokeDashoffset = '0';
-        const hotStart = len - hotLen / 2;
+        stage.classList.toggle('has-progress', fillLen >= 1.2);
+        const hotStart = knobLen - hotLen / 2;
         hot.style.strokeDasharray = hotLen + ' ' + total;
         hot.style.strokeDashoffset = String(-((hotStart % total) + total) % total);
-        svg.setAttribute('aria-valuenow', String(Math.round(t * 100)));
+        applyLayerGeometry(fillLen);
         return t;
       }
 
       function triggerComplete() {
         if (atEnd) return;
         atEnd = true;
-        rail.classList.remove('is-pulsing');
-        void rail.offsetWidth;
-        rail.classList.add('is-pulsing');
-        if (reduceMotion) {
-          window.setTimeout(function () { rail.classList.remove('is-pulsing'); }, 1400);
-        } else {
-          window.setTimeout(function () { rail.classList.remove('is-pulsing'); }, 1200);
-        }
+        stage.classList.remove('is-pulsing');
+        void stage.offsetWidth;
+        stage.classList.add('is-pulsing');
+        applyLayerGeometry(total);
+        window.setTimeout(function () {
+          stage.classList.remove('is-pulsing');
+          applyLayerGeometry(scrollT() * total);
+        }, reduceMotion ? 1400 : 1250);
       }
 
       function noteTravel(len) {
@@ -1820,44 +1910,13 @@ ${message}`);
         else atEnd = false;
       }
 
-      function onScrollOrResize() {
-        if (dragging || hovering) return;
-        const t = scrollT();
-        setVisual(t);
-        lastLen = t * total;
-        maybeEndFromT(t);
-      }
-
-      function startDrag(evt) {
-        dragging = true;
-        hovering = false;
-        travelled = 0;
-        rail.classList.add('is-dragging');
-        rail.classList.remove('is-hovering');
-        if (svg.setPointerCapture && evt.pointerId != null) {
-          try { svg.setPointerCapture(evt.pointerId); } catch (e) {}
+      function syncFromScroll() {
+        if (dragging || hovering) {
+          const t = scrollT();
+          setVisual(t, { knobT: lastLen / total });
+          maybeEndFromT(t);
+          return;
         }
-        moveDrag(evt);
-        evt.preventDefault();
-      }
-
-      function moveDrag(evt) {
-        if (!dragging) return;
-        const pt = clientToSvg(evt);
-        if (!pt) return;
-        const n = nearestLen(pt.x, pt.y);
-        const t = n.len / total;
-        setVisual(t);
-        noteTravel(n.len);
-        window.scrollTo(0, t * maxScroll());
-        maybeEndFromT(t);
-        evt.preventDefault();
-      }
-
-      function endDrag() {
-        if (!dragging) return;
-        dragging = false;
-        rail.classList.remove('is-dragging');
         const t = scrollT();
         setVisual(t);
         lastLen = t * total;
@@ -1865,63 +1924,99 @@ ${message}`);
       }
 
       function onPointerMove(evt) {
-        if (dragging) {
-          moveDrag(evt);
-          return;
-        }
+        if (dragging) return;
         if (evt.pointerType && evt.pointerType !== 'mouse') return;
         const pt = clientToSvg(evt);
         if (!pt) return;
         const n = nearestLen(pt.x, pt.y);
-        if (n.dist < 16) {
-          hovering = true;
-          rail.classList.add('is-hovering');
-          setVisual(n.len / total);
-        } else if (hovering) {
-          hovering = false;
-          rail.classList.remove('is-hovering');
-          const t = scrollT();
-          setVisual(t);
-          lastLen = t * total;
-        }
+        hovering = true;
+        stage.classList.add('is-hovering');
+        const t = scrollT();
+        setVisual(t, { knobT: n.len / total });
+        lastLen = n.len;
       }
 
-      function onPointerLeave() {
+      function onPointerLeave(evt) {
         if (dragging) return;
+        // leaving to a child still inside hero should not reset
+        if (evt.relatedTarget && hero.contains(evt.relatedTarget)) return;
         hovering = false;
-        rail.classList.remove('is-hovering');
+        stage.classList.remove('is-hovering');
         const t = scrollT();
         setVisual(t);
         lastLen = t * total;
       }
 
-      svg.addEventListener('pointerdown', startDrag);
-      svg.addEventListener('pointermove', onPointerMove);
-      svg.addEventListener('pointerup', endDrag);
-      svg.addEventListener('pointercancel', endDrag);
-      svg.addEventListener('pointerleave', onPointerLeave);
-      svg.addEventListener('lostpointercapture', endDrag);
-
-      svg.addEventListener('keydown', function (evt) {
-        const step = 0.06;
-        let t = scrollT();
-        let used = true;
-        if (evt.key === 'ArrowRight' || evt.key === 'ArrowDown') t += step;
-        else if (evt.key === 'ArrowLeft' || evt.key === 'ArrowUp') t -= step;
-        else if (evt.key === 'Home') t = 0;
-        else if (evt.key === 'End') t = 1;
-        else used = false;
-        if (!used) return;
-        t = Math.min(1, Math.max(0, t));
-        window.scrollTo({ top: t * maxScroll(), behavior: reduceMotion ? 'auto' : 'smooth' });
-        setVisual(t);
-        maybeEndFromT(t);
+      function startDrag(evt) {
+        if (isInteractive(evt.target)) return;
+        const pt = clientToSvg(evt);
+        if (!pt) return;
+        const n = nearestLen(pt.x, pt.y);
+        const nearPx = n.dist * pixelScale();
+        // Grab only when close to the path / knob, so buttons and empty typography stay usable
+        if (nearPx > 42) return;
+        dragging = true;
+        hovering = false;
+        travelled = 0;
+        lastLen = n.len;
+        activePointer = evt.pointerId;
+        stage.classList.add('is-dragging');
+        stage.classList.remove('is-hovering');
+        hero.classList.add('is-dragging');
+        if (hero.setPointerCapture && evt.pointerId != null) {
+          try { hero.setPointerCapture(evt.pointerId); } catch (e) {}
+        }
+        const t = scrollT();
+        setVisual(t, { knobT: n.len / total });
         evt.preventDefault();
-      });
+      }
 
-      window.addEventListener('scroll', onScrollOrResize, { passive: true });
-      window.addEventListener('resize', onScrollOrResize);
-      onScrollOrResize();
+      function moveDrag(evt) {
+        if (!dragging) return;
+        if (activePointer != null && evt.pointerId != null && evt.pointerId !== activePointer) return;
+        const pt = clientToSvg(evt);
+        if (!pt) return;
+        const n = nearestLen(pt.x, pt.y);
+        const t = scrollT();
+        setVisual(t, { knobT: n.len / total });
+        noteTravel(n.len);
+        evt.preventDefault();
+      }
+
+      function endDrag(evt) {
+        if (!dragging) return;
+        if (evt && activePointer != null && evt.pointerId != null && evt.pointerId !== activePointer) return;
+        dragging = false;
+        activePointer = null;
+        stage.classList.remove('is-dragging');
+        hero.classList.remove('is-dragging');
+        const t = scrollT();
+        // If the pointer is still in the hero, keep hover tracking
+        hovering = false;
+        stage.classList.remove('is-hovering');
+        setVisual(t);
+        lastLen = t * total;
+        maybeEndFromT(t);
+      }
+
+      hero.addEventListener('pointerdown', startDrag);
+      hero.addEventListener('pointermove', function (evt) {
+        if (dragging) moveDrag(evt);
+        else onPointerMove(evt);
+      });
+      hero.addEventListener('pointerup', endDrag);
+      hero.addEventListener('pointercancel', endDrag);
+      hero.addEventListener('pointerleave', onPointerLeave);
+      hero.addEventListener('lostpointercapture', endDrag);
+      // Keep dragging if the pointer leaves the hero mid-drag
+      window.addEventListener('pointermove', function (evt) {
+        if (dragging) moveDrag(evt);
+      });
+      window.addEventListener('pointerup', endDrag);
+
+      window.addEventListener('scroll', syncFromScroll, { passive: true });
+      window.addEventListener('resize', syncFromScroll);
+      syncFromScroll();
     })();
   </script>
 
